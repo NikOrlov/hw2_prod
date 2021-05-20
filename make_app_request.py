@@ -10,7 +10,7 @@ if __name__ == '__main__':
     for i in range(num_requests):
         num_rows = np.random.randint(low=1, high=10, size=1).item()
         data = np.random.randint(low=1, high=190, size=(num_rows, len(features)))
-        response = requests.get('http://127.0.0.1:8000/predict', json={'data': data.tolist(), 'features': features})
+        response = requests.get(address, json={'data': data.tolist(), 'features': features})
         print(response.json())
 
     csv_path = 'heart.csv'

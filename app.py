@@ -1,7 +1,6 @@
 import pickle
 from fastapi import FastAPI, HTTPException
 from typing import List
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 from pydantic import BaseModel
 import pandas as pd
@@ -61,4 +60,3 @@ async def predict(item: RequestItem):
         raise HTTPException(status_code=400, detail='Features mismatch')
     df = pd.DataFrame(item.data, columns=item.features)
     return make_prediction(pipeline, df)
-

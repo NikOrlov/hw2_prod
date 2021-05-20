@@ -13,7 +13,7 @@ if __name__ == '__main__':
         response = requests.get(address, json={'data': data.tolist(), 'features': features})
         print(response.json())
 
-    csv_path = 'heart.csv'
+    csv_path = 'data/heart.csv'
     df = pd.read_csv(csv_path)
     for i in range(df.shape[0]):
         row = df.iloc[i].tolist()[:-1]

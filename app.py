@@ -57,8 +57,8 @@ async def load_model():
 async def predict(item: RequestItem):
     if len(item.features) != len(item.data[0]):
         raise HTTPException(status_code=400, detail=f'Get {len(item.features)}-features while data has {len(item.data[0])}')
-    if set(item.features) != set(true_features):
+    if item.features != true_features:
         raise HTTPException(status_code=400, detail='Features mismatch')
-
     df = pd.DataFrame(item.data, columns=item.features)
     return make_prediction(pipeline, df)
+

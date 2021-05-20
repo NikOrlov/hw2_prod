@@ -16,15 +16,16 @@ def test_prediction_right():
     assert response.json() == [{'pred': 0}]
 
 
-def test_prediction_right_shuffle_columns():
+# Given feature/column names do not match the ones for the data given during fit. This will fail from v0.24.
+def test_prediction_shuffle_columns():
     json_data = {
         "data": [[1, 58, 1, 120, 284, 0, 0, 160, 0, 1.8, 1, 0, 2]],
         "features": ["sex", "age",  "cp", "trestbps", "chol", "fbs", "restecg", "thalach", "exang", "oldpeak", "slope",
                      "ca", "thal"]
     }
     response = client.get(f'{address}/predict', json=json_data)
-    assert response.status_code == 200
-    assert response.json() == [{'pred': 0}]
+    assert response.status_code == 400
+    assert response.json() == {'detail': 'Features mismatch'}
 
 
 def test_prediction_features_data_mismatch():
